@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>TMHA Entry Form</title>
+</head>
+<h1>TMHA Entry Form</h1>
+<h3>Select the desired fields and click "Submit" to view results.</h3>
+<body>
+	<script type="text/javascript" src="tabletop.js"></script>
+	<form action="">
+		County/Region:
+		<select name="County/Region" id="region">
+			<option value="0">San Luis Obispo County</option>
+			<option value="1">Santa Barbara County</option>
+			<option value="2">Southern California</option>
+			<option value="3">Northern California</option>
+			<option value="4">Central Valley</option>
+		</select>
+		<br></br>
+		City:
+		<input name="city" id="city">
+		<br></br>
+		Care Requirements:
+		<select name="care" id="care">
+			<option value="0">B&C</option>
+			<option value="1">RES</option>
+		</select>
+		<br></br>
+		<input type="button" value="Process" onclick="process()">
+	</form>
+	<script src="Myjs.js"></script>
+</body>
+</html>
