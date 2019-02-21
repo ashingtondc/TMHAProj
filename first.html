@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		table, th, td {
+  			border: 1px solid black;
+  			border-collapse: collapse;
+  			padding: 5px;
+		}
+	</style>
 <meta charset="ISO-8859-1">
 <title>TMHA Entry Form</title>
 </head>
@@ -10,7 +17,7 @@
 	<script type="text/javascript" src="tabletop.js"></script>
 	<form action="">
 		County/Region:
-		<select name="County/Region" id="region">
+		<select name="County/Region" id="region" required>
 			<option value="SLO County">San Luis Obispo County</option>
 			<option value="Santa Barbara County">Santa Barbara County</option>
 			<option value="Southern CA">Southern California</option>
@@ -19,16 +26,17 @@
 		</select>
 		<br></br>
 		City:
-		<input name="city" id="city">
+		<input name="city" id="city" required>
 		<br></br>
 		Care Requirements:
-		<select name="care" id="care">
+		<select name="care" id="care" required>
 			<option value="B&C">B&C</option>
 			<option value="RES">RES</option>
 		</select>
 		<br></br>
 		<input type="button" value="Process" onclick="process()">
 	</form>
+	<h3>Results:</h3>
 	<script src="Myjs.js"></script>
 </body>
 </html>
