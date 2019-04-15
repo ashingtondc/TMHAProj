@@ -1,22 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<style>
 		table, th, td {
-  			border: 1px solid black;
-  			border-collapse: collapse;
-  			padding: 5px;
-		}
+			border: 2px solid white;
+			border-collapse: collapse;
+			padding: 10px;
+	  }
+  
+		 tr:nth-child(even) {
+		 	background-color: #f5f5f5;
+		 
+		 }
+		 
+		 tr:hover {
+		 	background-color: #b7d55f;
+		 
+		 }
+		 
+		 th {
+			  background-color: #b7d55f;
+			  color: white;
+			  font-weight: bold;
+			}
+		
 	</style>
 <meta charset="ISO-8859-1">
 <title>TMHA Entry Form</title>
 </head>
-<h1>TMHA Entry Form</h1>
-<h3>Select the desired fields and click "Submit" to view results.</h3>
 <body>
+<header id="header">
+            <div class="row-navigation">
+            	  <div class="container">
+                    <a href="/" id="logo">TMHA</a>
+                    <a class="menu-link" id="nav-toggle" href="#menu"><span></span></a>
+                </div><!--/container-->
+            </div><!--/row-navigation-->
+      </header>
+<div id="entryform">
+	<h1>Housing Search</h1>
+	<h2>TMHA Client Placement Resource</h2>
+	<h4>Select the desired fields and click "Submit" to view results.</h4>
 	<script type="text/javascript" src="tabletop.js"></script>
 	<form action="">
+	<p>
 		County/Region:
+	
 		<select name="County/Region" id="region" required>
 			<option value="SLO County">San Luis Obispo County</option>
 			<option value="Santa Barbara County">Santa Barbara County</option>
@@ -24,19 +54,34 @@
 			<option value="Northern CA">Northern California</option>
 			<option value="Central Valley">Central Valley</option>
 		</select>
-		<br></br>
+	</p>
 		City:
 		<input name="city" id="city" required>
 		<br></br>
 		Care Requirements:
 		<select name="care" id="care" required>
+			<option value=""></option>
 			<option value="B&C">B&C</option>
 			<option value="RES">RES</option>
+			<option value="SNF">SNF</option>
 		</select>
 		<br></br>
-		<input type="button" value="Process" onclick="process()">
+		Sub-types:
+		
+		<br></br>
+		<input type="button" class="button" value="Process" onclick="process()">
+		<br></br>
 	</form>
 	<h3>Results:</h3>
+	<input id = "export" type="button" class="button-disabled" value="Export to Excel" disabled>
 	<script src="Myjs.js"></script>
+	<script src="xlsx.core.min.js"></script>
+	<script src="FileSaver.js"></script>
+	<script src="jquery-3.4.0.js"></script>
+	<script src="tableexport.js"></script>
+</div>
+<div id="results" style="overflow-x:auto;">
+
+</div>
 </body>
 </html>

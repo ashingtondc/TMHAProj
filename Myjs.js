@@ -22,7 +22,8 @@ function process()
 }
 
 function init() {
-  
+
+	
 }
 
 function showInfo(data, tabletop) {
@@ -36,8 +37,10 @@ function showInfo(data, tabletop) {
   let i;
   for (i = 0; i < headers.length; i++)
   {
-	  let cell = headerRow.insertCell(i);
+	  let cell = document.createElement('th');
+	  //let cell = headerRow.insertCell(i);
 	  cell.innerHTML = "<b>" + headers[i].toUpperCase() + "</b>";
+	  headerRow.appendChild(cell);
   }
   stuff.forEach(function(house)
   {
@@ -52,9 +55,81 @@ function showInfo(data, tabletop) {
 		  }
 	  }
   })
-  document.body.appendChild(table);
+  
+  
+  
+  let lastDiv = document.body.childNodes[document.body.childNodes.length - 2];
+  let divStuff = lastDiv.childNodes[0];
+  lastDiv.replaceChild(table, divStuff);
+
+
+  var ExportButtons = document.getElementById('results');
+
+  var instance = new TableExport(ExportButtons, {
+      formats: ['csv'],
+      exportButtons: false
+  });
+
+//                                          // "id" of selector    // format
+  var exportData = instance.getExportData()['results']['csv'];
+
+  var XLSbutton = document.getElementById('export');
+
+  XLSbutton.disabled = false;
+  XLSbutton.className ='button';
+  
+  XLSbutton.addEventListener('click', function (e) {
+      //                   // data          // mime              // name              // extension
+      instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+  });
+  
   //console.log(stuff[0].Location);
   //console.log(data);
 }
 
+function printResults()
+{
+	let results = document.getElementById("results");
+	newWin = window.open("");
+	newWin.document.write(results.innerHTML);
+	newWin.print();
+	newWin.close();
+}
+
+function exportExcel()
+{
+	var tableSelect = document.getElementById("results");
+	TableExport(tableSelect);
+}
+
+function exportTableToExcel(filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById("results");
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
 window.addEventListener('DOMContentLoaded', init)
