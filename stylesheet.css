@@ -156,7 +156,7 @@ input, button, submit { outline:none; }
 .button {
   background-color: white;
   border: solid;
-  color: #b7d55f;
+  color: #e36c3d;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -171,7 +171,7 @@ input, button, submit { outline:none; }
 }
 
 .button:hover {
-	background-color: #b7d55f; /* Green */
+	background-color: #e36c3d; /* Green */
   	border-style: solid;
   	border-color: white;
   	color: white;
@@ -1670,6 +1670,56 @@ li.mobile-search {
 	margin: 25px;
 }
 
+#heading {
+	margin: 25px;
+}
+
 #results {
 	margin: 25px;
+}
+
+#subtypes1, #subtypes2 {
+	float:left; 
+}
+
+#scroll {
+	margin: 15px;
+}
+
+h5 {
+	font-family: "gotham_boldregular", sans-serif;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+/* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  #subtypes1, #subtypes2 {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #subtypes1, #subtypes2 {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #subtypes1, #subtypes2 {
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: 1450px) {
+  #subtypes1, #subtypes2 {
+    width: 15%;
+  }
+}
+
+#subtypes::after {
+	content: "";
+  display: table;
+  clear: both;
 }

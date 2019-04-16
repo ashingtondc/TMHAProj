@@ -6,13 +6,32 @@ var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1U-j5z1X88miW
 let region;
 let city;
 let care;
+let subtypes = [];
 
 function process() 
 {
+	subtypes = [];
 	//window.location.href = './display.html';
 	region = document.getElementById("region").value;
 	city = document.getElementById("city").value;
 	care = document.getElementById("care").value;
+	let sb1 = document.getElementById("subtypes1").children;
+	let sb2 = document.getElementById("subtypes2").children;
+	for (let sb of sb1)
+	{
+		if (sb.checked)
+		{
+			subtypes.push(sb.value);
+		}
+	}
+	for (let sb of sb2)
+	{
+		if (sb.checked)
+		{
+			subtypes.push(sb.value);
+		}
+	}
+	console.log(subtypes);
 	console.log(region + " " + city + " " + care);
 	
 	Tabletop.init( { key: publicSpreadsheetUrl,
@@ -35,6 +54,7 @@ function showInfo(data, tabletop) {
   let header = table.createTHead();
   let headerRow = header.insertRow(0);
   let i;
+  let totalResults = 0;
   for (i = 0; i < headers.length; i++)
   {
 	  let cell = document.createElement('th');
@@ -44,14 +64,30 @@ function showInfo(data, tabletop) {
   }
   stuff.forEach(function(house)
   {
-	  if (house.Location.includes(city) && house.Type_of_Care.includes(care))
+	  if (house.Location.toLowerCase().includes(city.toLowerCase()) && house.Type_of_Care.includes(care))
 	  {
-		  let values = Object.values(house);
-		  let newRow = table.insertRow();
-		  for (let val of values)
+		  let hasSubtypes = true;
+		  for (let type of subtypes)
 		  {
-			  let newCell = newRow.insertCell();
-			  newCell.innerHTML = val;
+			  console.log(type);
+			  let other = type;
+			  other = other.toLowerCase();
+			  
+			  if (!house.Sub_Type.toLowerCase().includes(type))
+			  {
+				  hasSubtypes = false;
+			  }
+		  }
+		  if (hasSubtypes)
+		  {
+			  totalResults++;
+			  let values = Object.values(house);
+			  let newRow = table.insertRow();
+			  for (let val of values)
+			  {
+				  let newCell = newRow.insertCell();
+				  newCell.innerHTML = val;
+			  }
 		  }
 	  }
   })
@@ -61,7 +97,9 @@ function showInfo(data, tabletop) {
   let lastDiv = document.body.childNodes[document.body.childNodes.length - 2];
   let divStuff = lastDiv.childNodes[0];
   lastDiv.replaceChild(table, divStuff);
-
+  let countElement = document.createElement('h5');
+  countElement.innerHTML = "Results: " + totalResults;
+  header.insertBefore(countElement, headerRow);
 
   var ExportButtons = document.getElementById('results');
 
@@ -77,15 +115,24 @@ function showInfo(data, tabletop) {
 
   XLSbutton.disabled = false;
   XLSbutton.className ='button';
-  
+  XLSbutton.removeEventListener('click', function (e) {
+      //                   // data          // mime              // name              // extension
+      instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+  });
   XLSbutton.addEventListener('click', function (e) {
       //                   // data          // mime              // name              // extension
       instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
   });
   
+  //XLSbutton.scrollIntoView();
+  $('html, body').animate({
+	     scrollTop: $('#scroll').offset().top
+	}, 750);
   //console.log(stuff[0].Location);
   //console.log(data);
 }
+
+
 
 function printResults()
 {

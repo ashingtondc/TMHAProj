@@ -38,11 +38,13 @@
                 </div><!--/container-->
             </div><!--/row-navigation-->
       </header>
-<div id="entryform">
-	<h1>Housing Search</h1>
+<div id="heading">
+	<h1 style = "color:#7dbd55">Housing Search</h1>
 	<h2>TMHA Client Placement Resource</h2>
-	<h4>Select the desired fields and click "Submit" to view results.</h4>
 	<script type="text/javascript" src="tabletop.js"></script>
+</div>
+<div id="entryform">
+	<h4>Select the desired fields and click "Submit" to view results.</h4>
 	<form action="">
 	<p>
 		County/Region:
@@ -66,13 +68,35 @@
 			<option value="SNF">SNF</option>
 		</select>
 		<br></br>
-		Sub-types:
-		
-		<br></br>
-		<input type="button" class="button" value="Process" onclick="process()">
-		<br></br>
+		Sub-types: <br>
+		<div id="subtypes">
+		<div id="subtypes1">
+			<input type="checkbox" id="depression" value="depression"> Depression<br>
+			<input type="checkbox" id="sober living" value="sober living"> Sober Living<br>
+			<input type="checkbox" id="men's" value="men's"> Men's<br>
+			<input type="checkbox" id="women's" value="women's"> Women's<br>
+			<input type="checkbox" id="parent & child" value="parent & child"> Parent & Child<br>
+			<input type="checkbox" id="youth-adolescent" value="youth-adolescent"> Youth-Adolescent<br>
+			<input type="checkbox" id="detox" value="detox"> Detox<br>
+			<input type="checkbox" id="nursing home" value="nursing home"> Nursing Home<br>
+			<input type="checkbox" id="rehab" value="rehab"> Rehab<br>
+		</div>
+		<div id="subtypes2">
+			<input type="checkbox" id="12-step" value="12-step"> 12-Step<br>
+			<input type="checkbox" id="Alzheimer/dementia" value="Alzheimer/dementia"> Alzheimer/Dementia<br>
+			<input type="checkbox" id="faith-based" value="faith-based"> Faith-based<br>
+			<input type="checkbox" id="trauma/PTSD" value="trauma/PTSD"> Trauma/PTSD<br>
+			<input type="checkbox" id="traumatic brain injury" value="traumatic brain injury"> Traumatic Brain Injury<br>
+			<input type="checkbox" id="eating disorders" value="eating disorders"> Eating Disorders<br>
+			<input type="checkbox" id="veteran" value="veteran"> Veteran<br>
+			<input type="checkbox" id="human trafficking victim" value="human trafficking victim"> Human Trafficking Victim<br>
+			<input type="checkbox" id="schizophrenia" value="schizophrenia"> Schizophrenia<br>
+		</div>
+		</div>
 	</form>
-	<h3>Results:</h3>
+	<br>
+		<input type="button" class="button" value="Process" onclick="process()">
+		<div id="scroll"> </div>
 	<input id = "export" type="button" class="button-disabled" value="Export to Excel" disabled>
 	<script src="Myjs.js"></script>
 	<script src="xlsx.core.min.js"></script>
