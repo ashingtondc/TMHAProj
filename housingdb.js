@@ -2,7 +2,7 @@
  * 
  */
 src='./tabletop.js'
-var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1U-j5z1X88miWur9b2I-RkD5W9zl1_7SVTND93ToX6Yo/edit?usp=sharing';
+var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1E2as8VjUNbvP-h73a6Jd2m6P29dBo49WE8stIEoNA60/edit?usp=sharing';
 let region;
 let city;
 let care;
@@ -73,7 +73,7 @@ function showInfo(data, tabletop) {
 			  let other = type;
 			  other = other.toLowerCase();
 			  
-			  if (!house.Sub_Type.toLowerCase().includes(type))
+			  if (!house.Sub_Types.toLowerCase().includes(type))
 			  {
 				  hasSubtypes = false;
 			  }
@@ -115,6 +115,12 @@ function showInfo(data, tabletop) {
 
   XLSbutton.disabled = false;
   XLSbutton.className ='button';
+  $('#export').off('click');
+  $('#export').on('click', function (e) {
+      //                   // data          // mime              // name              // extension
+      instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+  });
+  /**
   XLSbutton.removeEventListener('click', function (e) {
       //                   // data          // mime              // name              // extension
       instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
@@ -123,7 +129,7 @@ function showInfo(data, tabletop) {
       //                   // data          // mime              // name              // extension
       instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
   });
-  
+  **/
   //XLSbutton.scrollIntoView();
   $('html, body').animate({
 	     scrollTop: $('#scroll').offset().top
