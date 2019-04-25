@@ -15,16 +15,8 @@ function process()
 	region = document.getElementById("region").value;
 	city = document.getElementById("city").value;
 	care = document.getElementById("care").value;
-	let sb1 = document.getElementById("subtypes1").children;
-	let sb2 = document.getElementById("subtypes2").children;
+	let sb1 = document.getElementById("subtypes").children;
 	for (let sb of sb1)
-	{
-		if (sb.checked)
-		{
-			subtypes.push(sb.value);
-		}
-	}
-	for (let sb of sb2)
 	{
 		if (sb.checked)
 		{
